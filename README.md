@@ -1,1 +1,1 @@
-# vary_bad_scripts
+# very_bad_scripts
