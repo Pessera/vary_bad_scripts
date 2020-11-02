@@ -2,8 +2,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 
 
-local version_scr = 2
-local version_text = "1.02"
+local version_scr = 3
+local version_text = "1.03"
 
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
