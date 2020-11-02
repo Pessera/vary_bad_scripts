@@ -20,6 +20,8 @@ function download_handler(id, status, p1, p2)
 				if tonumber(update_ini.info.version) > version_scr then
 					sampAddChatMessage('Update',-1)
 					update = true
+				else
+					sampAddChatMessage('not update',-1)
 				end
 				os.remove(path_update)
 			end
@@ -43,7 +45,7 @@ function main()
 		while true do
 			wait(1)
 			if update then
-				downloadUrlToFile(url_script, path_update, download_handler)
+				downloadUrlToFile(url_script, path, download_lua)
 				break
 			end
 		end
