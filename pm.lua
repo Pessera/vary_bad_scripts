@@ -6,12 +6,12 @@ local encoding = require 'encoding'
 encoding.default = 'CP1251'
 local utf8 = encoding.UTF8
 
-local version_scr = 1
-local version_text = "1.00"
+local version_scr = 2
+local version_text = "1.01"
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
 local url_update = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/update.ini"
-local url_script = "https://github.com/Pessera/vary_bad_scripts/raw/main/pm.lua"
+local url_script = ""
 local path = thisScript().path
 
 function download_handler(id, status, p1, p2)
@@ -21,11 +21,11 @@ function download_handler(id, status, p1, p2)
 					sampAddChatMessage('Update',-1)
 					update = true
 				end
-				--os.remove(path_update)
+				os.remove(path_update)
 			end
 end
 
-function download_lua(id, status, p1, p2)
+function download_lua()
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 		sampAddChatMessage('Update succes',-1)
 		thisScript():reload()
@@ -41,10 +41,10 @@ function main()
 	downloadUrlToFile(url_update, path_update, download_handler)
 		
 		while true do
-			wait(0)
+			wait(1)
 			if update then
-				downloadUrlToFile(url_script, path, download_lua)
+				downloadUrlToFile(url_script, path_update, download_handler)
+				break
 			end
-			break
 		end
 end
