@@ -1,10 +1,7 @@
 local ev = require('lib.samp.events')
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
-local vk = require 'vkeys'
-local encoding = require 'encoding'
-encoding.default = 'CP1251'
-local utf8 = encoding.UTF8
+
 
 local version_scr = 1
 local version_text = "1.00"
@@ -18,10 +15,10 @@ function download_handler(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			update_ini = inicfg.load(nil,path_update)
 				if tonumber(update_ini.info.version) > version_scr then
-					sampAddChatMessage('Update',-1)
+					sampAddChatMessage('Обнаружено обновление! Текущая версия: '..version_text.. ' | Новая версия: '..update_ini.info.version_text,0x57CC41)
 					update = true
 				else
-					sampAddChatMessage('not update',-1)
+					sampAddChatMessage('Обновлений не обнаружено',0x57CC41)
 				end
 				os.remove(path_update)
 			end
@@ -29,7 +26,7 @@ end
 
 function download_lua()
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-		sampAddChatMessage('Update succes',-1)
+		sampAddChatMessage('Обновление успешно завершено',0x57CC41)
 		thisScript():reload()
 	end
 end
