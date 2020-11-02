@@ -3,8 +3,9 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 
 
-local version_scr = 1
-local version_text = "1.00"
+local version_scr = 2
+local version_text = "1.02"
+
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
 local url_update = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/update.ini"
@@ -17,8 +18,9 @@ function download_handler(id, status, p1, p2)
 				if tonumber(update_ini.info.version) ~= version_scr then
 					sampAddChatMessage('Обнаружено обновление! Текущая версия: '..version_text.. ' | Новая версия: '..update_ini.info.version_text,0x57CC41)
 					update = true
-				else
-					sampAddChatMessage('Обновлений не обнаружено',0x57CC41)
+				end
+				if tonumber(update_ini.info.version) == version_scr then
+					sampAddChatMessage('Обновлений не обнаружено! Актуальная версия: '..version_text,0x57CC41)
 				end
 				os.remove(path_update)
 			end
