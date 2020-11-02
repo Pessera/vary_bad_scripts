@@ -3,8 +3,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 
 
-local version_scr = 1
-local version_text = "1.00"
+local version_scr = 2
+local version_text = "2.00"
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
 local url_update = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/update.ini"
