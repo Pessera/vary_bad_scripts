@@ -2,8 +2,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 
 
-local version_scr = 1
-local version_text = "1.00"
+local version_scr = 2
+local version_text = "1.02"
 
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
@@ -15,19 +15,16 @@ function download_handler(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			update_ini = inicfg.load(nil,path_update)
 				if tonumber(update_ini.info.version) ~= version_scr then
-					sampAddChatMessage('Найдено обновление! Текущая версия: '..version_text.. ' | Актуальная версия: '..update_ini.info.version_text,0x57CC41)
+					sampAddChatMessage('РќР°Р№РґРµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ! РўРµРєСѓС‰Р°СЏ РІРµСЂСЃРёСЏ: '..version_text.. ' | РђРєС‚СѓР°Р»СЊРЅР°СЏ РІРµСЂСЃРёСЏ: '..update_ini.info.version_text,0x57CC41)
 					update = true
 				end
-				if tonumber(update_ini.info.version) == version_scr then
-					sampAddChatMessage('Обновлений не найден! Актуальная версия: '..version_text,0x57CC41)
-				end
-				os.remove(path_update)
+				--os.remove(path_update)
 			end
 end
 
 function download_lua(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-		sampAddChatMessage('Обновление успешно завершено',0x57CC41)
+		sampAddChatMessage('РћР±РЅРѕРІР»РµРЅРёРµ СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅРѕ',0x57CC41)
 		thisScript():reload()
 	end
 end
@@ -35,8 +32,6 @@ end
 function main()
 	if not isSampLoaded() or not isSampfuncsLoaded() then return end
 	while not isSampAvailable() do wait(0) end
-	
-	_, id = sampGetPlayerIdByCharHandle(PLAYER_PED)
 
 	downloadUrlToFile(url_update, path_update, download_handler)
 		
