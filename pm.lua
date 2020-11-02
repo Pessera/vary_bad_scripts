@@ -35,7 +35,9 @@ end
 function main()
 	if not isSampLoaded() or not isSampfuncsLoaded() then return end
 	while not isSampAvailable() do wait(0) end
-
+	sampRegisterChatCommand('test', function()
+			sampAddChatMessage('Test',0x57CC41)
+   	 end)
 	downloadUrlToFile(url_update, path_update, download_handler)
 		
 		while true do
