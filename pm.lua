@@ -1,10 +1,9 @@
-local ev = require('lib.samp.events')
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 
 
-local version_scr = 2
-local version_text = "1.02"
+local version_scr = 1
+local version_text = "1.00"
 
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
@@ -16,11 +15,11 @@ function download_handler(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			update_ini = inicfg.load(nil,path_update)
 				if tonumber(update_ini.info.version) ~= version_scr then
-					sampAddChatMessage('Обнаружено обновление! Текущая версия: '..version_text.. ' | Новая версия: '..update_ini.info.version_text,0x57CC41)
+					sampAddChatMessage('ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ! Г’ГҐГЄГіГ№Г Гї ГўГҐГ°Г±ГЁГї: '..version_text.. ' | ГЌГ®ГўГ Гї ГўГҐГ°Г±ГЁГї: '..update_ini.info.version_text,0x57CC41)
 					update = true
 				end
 				if tonumber(update_ini.info.version) == version_scr then
-					sampAddChatMessage('Обновлений не обнаружено! Актуальная версия: '..version_text,0x57CC41)
+					sampAddChatMessage('ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГ© Г­ГҐ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­Г®! ГЂГЄГІГіГ Г«ГјГ­Г Гї ГўГҐГ°Г±ГЁГї: '..version_text,0x57CC41)
 				end
 				os.remove(path_update)
 			end
@@ -28,7 +27,7 @@ end
 
 function download_lua()
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-		sampAddChatMessage('Обновление успешно завершено',0x57CC41)
+		sampAddChatMessage('ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГіГ±ГЇГҐГёГ­Г® Г§Г ГўГҐГ°ГёГҐГ­Г®',0x57CC41)
 		thisScript():reload()
 	end
 end
