@@ -11,7 +11,7 @@ local version_text = "1.01"
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
 local url_update = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/update.ini"
-local url_script = ""
+local url_script = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/pm.lua"
 local path = thisScript().path
 
 function download_handler(id, status, p1, p2)
