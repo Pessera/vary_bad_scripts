@@ -14,7 +14,7 @@ local path = thisScript().path
 function download_handler(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			update_ini = inicfg.load(nil,path_update)
-				if tonumber(update_ini.info.version) > version_scr then
+				if tonumber(update_ini.info.version) ~= version_scr then
 					sampAddChatMessage('Обнаружено обновление! Текущая версия: '..version_text.. ' | Новая версия: '..update_ini.info.version_text,0x57CC41)
 					update = true
 				else
