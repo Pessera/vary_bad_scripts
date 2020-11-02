@@ -15,10 +15,10 @@ function download_handler(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			update_ini = inicfg.load(nil,path_update)
 				if tonumber(update_ini.info.version) ~= version_scr then
-					sampAddChatMessage('РћР±РЅР°СЂСѓР¶РµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ! РўРµРєСѓС‰Р°СЏ РІРµСЂСЃРёСЏ: '..version_text.. ' | РќРѕРІР°СЏ РІРµСЂСЃРёСЏ: '..update_ini.info.version_text,0x57CC41)
+					sampAddChatMessage('Обнаружено обновление! Текущая версия: '..version_text.. ' | Новая версия: '..update_ini.info.version_text,0x57CC41)
 					update = true
 				else
-					sampAddChatMessage('РћР±РЅРѕРІР»РµРЅРёР№ РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅРѕ',0x57CC41)
+					sampAddChatMessage('Обновлений не обнаружено',0x57CC41)
 				end
 				os.remove(path_update)
 			end
@@ -26,7 +26,7 @@ end
 
 function download_lua()
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-		sampAddChatMessage('РћР±РЅРѕРІР»РµРЅРёРµ СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅРѕ',0x57CC41)
+		sampAddChatMessage('Обновление успешно завершено',0x57CC41)
 		thisScript():reload()
 	end
 end
