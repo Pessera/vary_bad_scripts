@@ -51,7 +51,7 @@ function download_handler(id, status, p1, p2)
 					update = true
 				end
 				if tonumber(update_ini.info.version) == version_scr then
-					sampAddChatMessage(tag..'Updates not found!, 0x57CC41)
+					sampAddChatMessage(tag..'Updates not found!', 0x57CC41)
 				end
 				os.remove(path_update)
 			end
