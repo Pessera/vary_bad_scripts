@@ -5,6 +5,7 @@ local encoding = require 'encoding'
 encoding.default = 'CP1251'
 local utf8 = encoding.UTF8
 
+local tag = '[{AF7AF1}FarmHP{40EB3D}{FFFFFF}] '
 local version_scr = 2
 local version_text = "1.20"
 local update = false
@@ -46,11 +47,11 @@ function download_handler(id, status, p1, p2)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 			update_ini = inicfg.load(nil,path_update)
 				if tonumber(update_ini.info.version) ~= version_scr then
-					sampAddChatMessage('Update detected Current version: '..version_text.. ' | New version: '..update_ini.info.version_text, 0x57CC41)
+					sampAddChatMessage(tag..'Update detected Current version: '..version_text.. ' | New version: '..update_ini.info.version_text, 0x57CC41)
 					update = true
 				end
 				if tonumber(update_ini.info.version) == version_scr then
-					sampAddChatMessage('No updates found! Current version: '..version_text, 0x57CC41)
+					sampAddChatMessage(tag..'Updates not found!, 0x57CC41)
 				end
 				os.remove(path_update)
 			end
@@ -58,7 +59,7 @@ end
 
 function download_lua(id, status)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-		sampAddChatMessage('Update completed successfully',0x57CC41)
+		sampAddChatMessage(tag..'Update completed successfully',0x57CC41)
 		thisScript():reload()
 	end
 end
@@ -83,7 +84,7 @@ local cnfg = inicfg.load({
 
 function main()
     repeat wait(0) until isSampAvailable()
-	sampAddChatMessage('’уета загружена', -1)
+	sampAddChatMessage(tag..'Loaded', -1)
 	if config.setting.spectrr == 0 then
 		thisScript():reload()
 	elseif config.setting.dis == 0 then
