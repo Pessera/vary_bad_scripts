@@ -5,9 +5,9 @@ local encoding = require 'encoding'
 encoding.default = 'CP1251'
 local utf8 = encoding.UTF8
 
-local tag = '[{AF7AF1}FarmHP{40EB3D}{FFFFFF}] '
-local version_scr = 2
-local version_text = "1.20"
+local tag = '[{AF7AF1}Test{40EB3D}{FFFFFF}] '
+local version_scr = 3
+local version_text = "1.30"
 local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
 local url_update = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/update.ini"
