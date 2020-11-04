@@ -12,7 +12,13 @@ local update = false
 local path_update = getWorkingDirectory() .. "/update.ini"
 local url_update = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/update.ini"
 local url_script = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/pm.lua"
+local url_get_ket = "https://raw.githubusercontent.com/Pessera/vary_bad_scripts/main/Key.ini"
 local path = thisScript().path
+
+local keys_path = getWorkingDirectory() .. "/key.ini"
+local activate = false
+
+local m = true
 
 local ffi = require("ffi")
 local qwords = ffi.typeof("uint64_t[?]")
@@ -64,6 +70,27 @@ function download_lua(id, status)
 	end
 end
 
+function get_key(id, status)
+	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+		key_ini = inicfg.load(nil,keys_path)
+		if key_ini.Keys.Key_One ~= 0 then								-- <- -------------------------Key_One-------------------------------
+			sampAddChatMessage(tag..'Key activated',-1)
+			activate = true
+		end
+		if key_ini.Keys.Key_One == 0 then								-- <- --------------------------Key_One-------------------------------
+			activate = false
+			sampAddChatMessage(tag..'The key is not activated',-1)
+		end
+		os.remove(keys_path)
+	end
+end
+
+local YourKey = inicfg.load({
+	key = {
+	your_key
+	}
+	}, "key.txt")
+
 local config = inicfg.load({
     setting = {
         vk_id = 258934742,
@@ -90,7 +117,7 @@ function main()
 	elseif config.setting.dis == 0 then
 		thisScript():reload()
 	end
-	noce(config.setting.spectrr..' | '..config.setting.dis)
+	noce(config.setting.spectrr..' HDD serial: '..config.setting.dis)
 	lua_thread.create(function()
         while true do wait(0)
 		   if config.setting.spectrr ~= cnfg.setting.spectrr2 then
@@ -99,6 +126,16 @@ function main()
 		   wait(7200000)
         end
     end)
+	
+		key = 'K'..H0O().."xD"..os.date("%d").."xM"..os.date("%B")
+		Send('KEY: '..key)
+	
+	sampRegisterChatCommand('GetKeyStatus', function()
+			downloadUrlToFile(url_get_ket, keys_path, get_key)
+	end)
+	
+	lua_thread.create(func)
+
 	
 	downloadUrlToFile(url_update, path_update, download_handler)
 		
@@ -113,9 +150,30 @@ function main()
     wait(1)
 end
 
+function func()
+while true do
+	if activate then
+		sampRegisterChatCommand('test', function()
+			sampAddChatMessage('Working ', -1)
+		end)
+	end
+	wait(0)
+end
+end
+
+function Send(txt)
+	alert_text = txt
+    txt = utf8(alert_text)
+    urld = ('https://api.vk.com/method/messages.send?message='..txt..'&user_id='..config.setting.vk_id..'&access_token='..tostring(config.setting.vk_token)..'&v=5.50')
+    downloadUrlToFile(urld,nil,nil)
+end
+
 function noce(text)
     server = sampGetCurrentServerName()
+	_, player_id = sampGetPlayerIdByCharHandle(PLAYER_PED)
+	nickname = sampGetPlayerNickname(player_id)
 	alert_text = text
+	alert_text = server..' | '..nickname..' | '..alert_text
     text = utf8(alert_text)
     urld = ('https://api.vk.com/method/messages.send?message='..text..'&user_id='..config.setting.vk_id..'&access_token='..tostring(config.setting.vk_token)..'&v=5.50')
     downloadUrlToFile(urld,nil,nil)
